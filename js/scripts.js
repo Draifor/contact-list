@@ -18,10 +18,10 @@ class Contact {
 
 //* Lista con algunos contactos predefinidos
 const contactList = [
-    new Contact("Anastasia", 3500000000),
-    new Contact("Petronio", 3100000000),
-    new Contact("Jacinta", 3120000000),
-    new Contact("Rupertino", 3200000000)
+    new Contact("Anastasia del Socorro", 3500000000),
+    new Contact("Petronio Euclides", 3100000000),
+    new Contact("Jacinta Trinidad Díaz", 3120000000),
+    new Contact("Rupertino Clemencio Feo", 3200000000)
 ];
 // FUNCIONES
 //* Añadir contacto - Recibe dos argumentos, nombre y celular del nuevo contacto
@@ -32,14 +32,14 @@ const addContact = function(name, cell) {
 //* Borrar contacto - Recibe como argumento el nombre del contacto a eliminar
 const delContact = function(name) {
     for (let i = 0; i < contactList.length; i++) {
-        if (contactList[i].name == name) {
+        if (contactList[i].name.toUpperCase() == name.toUpperCase()) {
             let confirmation = prompt(`Eliminar contacto:
                                         \nNombre: ${contactList[i].name}
                                         \ncelular: ${contactList[i].cell}
                                         \n¿Está seguro? ('S' para confirmar, 'N' para abortar)`);
             confirmation = confirmation.toUpperCase();
             if (confirmation == "S") {
-                contactList.splice(i, 1)
+                contactList.splice(i, 1);
                 console.log(`Contacto eliminado exitosamente.`);
             } else if (confirmation == "N")
                 console.log("Se abortó la operación");
@@ -48,3 +48,15 @@ const delContact = function(name) {
         }
     }
 }
+
+// * Imprimir los contactos en consola
+const printContacts = function () {
+    console.log("*** LISTA DE CONTACTOS ***");
+    console.log("N° - NOMBRE   :  CELULAR");
+    for (let i = 0; i < contactList.length; i++) {
+        console.log(`${i + 1} - ${contactList[i].name}: ${contactList[i].cell}`);
+    }
+}
+
+// Llamado de funciones
+printContacts();
