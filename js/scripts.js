@@ -13,13 +13,13 @@ class Contact {
 // FUNCIONES
 //* Añadir contacto - Pide los datos al usuario mediante un prompt
 const addContact = function () {
-  alert("Ingresar nuevo contacto");
-  const name = prompt("Nombre: ");
-  const lastName = prompt("Apellido: ");
-  const cell = prompt("Celular: ");
-  const locations = [prompt("Dirección: "), prompt("Ciudad: ")];
-  contactList.push(new Contact(name, lastName, cell, locations));
-  console.log("Contacto añadido exitosamente.");
+    alert("Ingresar nuevo contacto");
+    const name = prompt("Nombre: ");
+    const lastName = prompt("Apellido: ");
+    const cell = prompt("Celular: ");
+    const locations = [prompt("Dirección: "), prompt("Ciudad: ")];
+    contactList.push(new Contact(name, lastName, cell, locations));
+    console.log("Contacto añadido exitosamente.");
 };
 
 //* Actualizar contacto
@@ -35,25 +35,24 @@ const updateContact = function () {
     } else console.log("No existe ningún contacto con el Id especificado.");
 }
 
-//* Borrar contacto - Recibe como argumento el nombre del contacto a eliminar
-const delContact = function (name) {
-  if (name != null) {
-    for (let i = 0; i < contactList.length; i++) {
-      if (contactList[i].name.toUpperCase() == name.toUpperCase()) {
-        let confirmation = prompt(`Eliminar contacto:
-                                 \nNombre: ${contactList[i].name} ${contactList[i].lastName}
-                                 \ncelular: ${contactList[i].cell}
-                                 \n¿Está seguro? ('S' para confirmar, 'N' para abortar)`);
+//* Borrar contacto
+const delContact = function () {
+    const contactId = parseInt(prompt("Ingrese el Id del contacto a eliminar: "));
+    const contact = contactList.find(contact => contact.id == contactId);
+    if (contact != undefined) {
+        let confirmation = prompt(`Eliminar contacto Id ${contact.id}:
+                                    \nNombre: ${contact.name} ${contact.lastName}
+                                    \ncelular: ${contact.cell}
+                                    \nDirección: ${contact.locations[0]}, ${contact.locations[1]}
+                                    \n¿Está seguro? ('S' para confirmar, 'N' para abortar)`);
         confirmation = confirmation.toUpperCase();
         if (confirmation == "S") {
-          contactList.splice(i, 1);
-          console.log(`Contacto eliminado exitosamente.`);
+            contactList.splice(contactList.indexOf(contact), 1);
+            console.log(`Contacto eliminado exitosamente.`);
         } else if (confirmation == "N") console.log("Se abortó la operación");
         else console.log("Opción inválida");
-      }
-    }
-  } else
-    console.log("Debes ingresar el nombre del contacto que deseas eliminar.");
+    } else
+    console.log("No existe ningún contacto con el Id especificado");
 };
 
 // * Imprimir los contactos en consola por medio de un for
