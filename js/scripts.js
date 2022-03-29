@@ -1,16 +1,3 @@
-/*Lista de contactos en JavaScript
-Ajusta las funciones de crear y eliminar un contacto para que puedan almacenar
-la siguiente información como objetos:
-1. id
-2. nombres
-3. apellidos
-4. teléfono
-5. ubicaciones
-    ciudad
-    dirección
-Publica tu código en Github, en tu repositorio contact-list crea un branch
-llamado project-2 y compártelo con nosotros. 👍🏼⬇️ */
-
 //* Definición de la función para crear objetos Contact
 class Contact {
   constructor(name, lastName, cell, locations) {
@@ -34,6 +21,19 @@ const addContact = function () {
   contactList.push(new Contact(name, lastName, cell, locations));
   console.log("Contacto añadido exitosamente.");
 };
+
+//* Actualizar contacto
+const updateContact = function () {
+    const contactId = parseInt(prompt("Ingresa el id del contacto a modificar: "));
+    const contact = contactList.find(contact => contact.id == contactId);
+    if (contact != undefined) {
+        alert("ACTUALIZAR CONTACTO");
+        contact.name = prompt("Nombre: ", contact.name);
+        contact.lastName = prompt("Apellido: ", contact.lastName);
+        contact.cell = prompt("Celular: ", contact.cell);
+        contact.locations = [prompt("Dirección: ", contact.locations[0]), prompt("Ciudad: ", contact.locations[1])];
+    } else console.log("No existe ningún contacto con el Id especificado.");
+}
 
 //* Borrar contacto - Recibe como argumento el nombre del contacto a eliminar
 const delContact = function (name) {
@@ -101,4 +101,4 @@ console.log("LISTA DE CONTACTOS");
 console.table(contactList);
 
 // Llamado de las funciones
-printContacts();
+// printContacts();
