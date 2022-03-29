@@ -60,16 +60,16 @@ const printContacts = function () {
   console.log("**************************");
   console.log("*** LISTA DE CONTACTOS ***");
   console.log("**************************");
-  for (let i = 0; i < contactList.length; i++) {
+  contactList.forEach(contact => {
     console.log("**************************");
-    console.log(`ID Contacto: ${contactList[i].id}`);
-    console.log(`Nombre: ${contactList[i].name} ${contactList[i].lastName}`);
-    console.log(`Celular: ${contactList[i].cell}`);
+    console.log(`ID Contacto: ${contact.id}`);
+    console.log(`Nombre: ${contact.name} ${contact.lastName}`);
+    console.log(`Celular: ${contact.cell}`);
     console.log(
-      `Dirección: ${contactList[i].locations[0]}, ${contactList[i].locations[1]}`
+      `Dirección: ${contact.locations[0]}, ${contact.locations[1]}`
     );
     console.log("**************************");
-  }
+  });
 };
 //* Ejecución
 // Variables
@@ -100,4 +100,4 @@ console.log("LISTA DE CONTACTOS");
 console.table(contactList);
 
 // Llamado de las funciones
-// printContacts();
+printContacts();
