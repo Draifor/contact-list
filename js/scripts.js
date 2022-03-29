@@ -17,46 +17,50 @@ class Contact {
 // FUNCIONES
 //* Añadir contacto - Pide los datos al usuario mediante un prompt
 const addContact = function () {
-    alert("Ingresar nuevo contacto");
-    const name = prompt("Nombre: ");
-    const lastName = prompt("Apellido: ");
-    const cell = prompt("Celular: ");
-    const locations = [prompt("Dirección: "), prompt("Ciudad: ")];
-    contactList.push(new Contact(name, lastName, cell, locations));
-    console.log("Contacto añadido exitosamente.");
+  alert("Ingresar nuevo contacto");
+  const name = prompt("Nombre: ");
+  const lastName = prompt("Apellido: ");
+  const cell = prompt("Celular: ");
+  const locations = [prompt("Dirección: "), prompt("Ciudad: ")];
+  contactList.push(new Contact(name, lastName, cell, locations));
+  console.log("Contacto añadido exitosamente.");
 };
 
 //* Actualizar contacto
 const updateContact = function () {
-    const contactId = parseInt(prompt("Ingresa el id del contacto a modificar: "));
-    const contact = contactList.find(contact => contact.id == contactId);
-    if (contact != undefined) {
-        alert("ACTUALIZAR CONTACTO");
-        contact.name = prompt("Nombre: ", contact.name);
-        contact.lastName = prompt("Apellido: ", contact.lastName);
-        contact.cell = prompt("Celular: ", contact.cell);
-        contact.locations = [prompt("Dirección: ", contact.locations[0]), prompt("Ciudad: ", contact.locations[1])];
-    } else console.log("No existe ningún contacto con el Id especificado.");
-}
+  const contactId = parseInt(
+    prompt("Ingresa el id del contacto a modificar: ")
+  );
+  const contact = contactList.find((contact) => contact.id == contactId);
+  if (contact != undefined) {
+    alert("ACTUALIZAR CONTACTO");
+    contact.name = prompt("Nombre: ", contact.name);
+    contact.lastName = prompt("Apellido: ", contact.lastName);
+    contact.cell = prompt("Celular: ", contact.cell);
+    contact.locations = [
+      prompt("Dirección: ", contact.locations[0]),
+      prompt("Ciudad: ", contact.locations[1]),
+    ];
+  } else console.log("No existe ningún contacto con el Id especificado.");
+};
 
 //* Borrar contacto
 const delContact = function () {
-    const contactId = parseInt(prompt("Ingrese el Id del contacto a eliminar: "));
-    const contact = contactList.find(contact => contact.id == contactId);
-    if (contact != undefined) {
-        let confirmation = prompt(`Eliminar contacto Id ${contact.id}:
+  const contactId = parseInt(prompt("Ingrese el Id del contacto a eliminar: "));
+  const contact = contactList.find((contact) => contact.id == contactId);
+  if (contact != undefined) {
+    let confirmation = prompt(`Eliminar contacto Id ${contact.id}:
                                     \nNombre: ${contact.name} ${contact.lastName}
                                     \ncelular: ${contact.cell}
                                     \nDirección: ${contact.locations[0]}, ${contact.locations[1]}
                                     \n¿Está seguro? ('S' para confirmar, 'N' para abortar)`);
-        confirmation = confirmation.toUpperCase();
-        if (confirmation == "S") {
-            contactList.splice(contactList.indexOf(contact), 1);
-            console.log(`Contacto eliminado exitosamente.`);
-        } else if (confirmation == "N") console.log("Se abortó la operación");
-        else console.log("Opción inválida");
-    } else
-    console.log("No existe ningún contacto con el Id especificado");
+    confirmation = confirmation.toUpperCase();
+    if (confirmation == "S") {
+      contactList.splice(contactList.indexOf(contact), 1);
+      console.log(`Contacto eliminado exitosamente.`);
+    } else if (confirmation == "N") console.log("Se abortó la operación");
+    else console.log("Opción inválida");
+  } else console.log("No existe ningún contacto con el Id especificado");
 };
 
 // * Imprimir los contactos en consola por medio de un for
@@ -64,14 +68,12 @@ const printContacts = function () {
   console.log("**************************");
   console.log("*** LISTA DE CONTACTOS ***");
   console.log("**************************");
-  contactList.forEach(contact => {
+  contactList.forEach((contact) => {
     console.log("**************************");
     console.log(`ID Contacto: ${contact.id}`);
     console.log(`Nombre: ${contact.name} ${contact.lastName}`);
     console.log(`Celular: ${contact.cell}`);
-    console.log(
-      `Dirección: ${contact.locations[0]}, ${contact.locations[1]}`
-    );
+    console.log(`Dirección: ${contact.locations[0]}, ${contact.locations[1]}`);
     console.log("**************************");
   });
 };
