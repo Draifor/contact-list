@@ -1,3 +1,7 @@
+/* En tu repositorio de GitHub contact-list, crea un branch llamado review-1
+Completa tu producto de lista de contactos para una revisión en vivo al grupo
+Bonus: Añade una función que permita actualizar un contacto */
+
 //* Definición de la función para crear objetos Contact
 class Contact {
   constructor(name, lastName, cell, locations) {
