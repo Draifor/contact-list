@@ -61,15 +61,20 @@ const delContact = function () {
 
 //* Métodos de ordenamiento
 // Por nombre
-const orderByName = function() {
-  for (let i = 0; i < contactList.length - 1; i ++) {
-    for (let j = 0; j < contactList.length - 1 - i; j++) {
-      if (contactList[i].name > contactList[i + 1].name) {
-        [contactList[i], contactList[i + 1]] = [contactList[i + 1], contactList[i]];
-      }
-    }
-  }
+const sortName = function (first, second) {
+  return first.name.localeCompare(second.name);
 };
+const orderByName = function() {
+  contactList = contactList.sort(sortName);
+};
+
+// Por apellido
+const sortLastName = function (first, second) {
+  return first.lastName.localeCompare(second.lastName)
+};
+const orderByLastName = function () {
+  contactList = contactList.sort(sortLastName);
+}
 
 // * Imprimir los contactos en consola por medio de un for
 const printContacts = function () {
@@ -131,7 +136,7 @@ printContacts();
 orderByName();
 printContacts();
 // addContact();
-addContact();
-orderByName();
+// addContact();
+orderByLastName();
 printContacts();
 
