@@ -10,7 +10,7 @@ const addContact = function () {
     id: contactsCounter++,
     name: prompt("Nombre: "),
     lastName: prompt("Apellido: "),
-    cell: prompt("Celular: "),
+    cell: parseInt(prompt("Celular: ")),
     locations: [prompt("Dirección: "), prompt("Ciudad: ")],
   };
   contactList.push(contact);
@@ -38,7 +38,12 @@ const updateContact = function () {
 //* Borrar contacto
 const delContact = function () {
   const contactId = parseInt(prompt("Ingrese el Id del contacto a eliminar: "));
-  const contact = contactList.find((contact) => contact.id == contactId);
+  let contact;
+  const auxContactList = contactList.filter((current) => {
+    if (current.id == contactId) {
+      contact = current;
+    } else return true;
+  });
   if (contact != undefined) {
     let confirmation = prompt(`Eliminar contacto Id ${contact.id}:
                                     \nNombre: ${contact.name} ${contact.lastName}
@@ -47,7 +52,7 @@ const delContact = function () {
                                     \n¿Está seguro? (Si/No)`);
     confirmation = confirmation.toUpperCase();
     if (confirmation == "SI") {
-      contactList = contactList.filter((contact) => contact.id != contactId);
+      contactList = auxContactList;
       console.log(`Contacto eliminado exitosamente.`);
     } else if (confirmation == "NO") console.log("Se abortó la operación");
     else console.log("Opción inválida");
@@ -89,30 +94,30 @@ let contactsCounter = 1;
 let contactList = [
   {
     id: contactsCounter++,
-    name: "Anastasia",
-    lastName: "del Socorro",
-    cell: "3500000000",
-    locations: ["Calle 5 # 8 - 25", "Tangamandapio"],
+    name: "Jacinta",
+    lastName: "Trinidad Díaz",
+    cell: 3120000000,
+    locations: ["Calle 8 # 8 - 8", "Cucaita"],
   },
   {
     id: contactsCounter++,
     name: "Petronio",
     lastName: "Euclides",
-    cell: "3100000000",
+    cell: 3100000000,
     locations: ["Cra 15 # 24 - 14", "Somondoco"],
   },
   {
     id: contactsCounter++,
-    name: "Jacinta",
-    lastName: "Trinidad Díaz",
-    cell: "3120000000",
-    locations: ["Calle 8 # 8 - 8", "Cucaita"],
+    name: "Anastasia",
+    lastName: "del Socorro",
+    cell: 3500000000,
+    locations: ["Calle 5 # 8 - 25", "Tangamandapio"],
   },
   {
     id: contactsCounter++,
     name: "Rupertino",
     lastName: "Feo",
-    cell: "3200000000",
+    cell: 3200000000,
     locations: ["Calle 13 # 23 - 12", "Sutamarchan"],
   },
 ];
@@ -125,7 +130,7 @@ console.table(contactList);
 printContacts();
 orderByName();
 printContacts();
-addContact();
+// addContact();
 addContact();
 orderByName();
 printContacts();
