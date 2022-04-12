@@ -2,27 +2,18 @@
 Completa tu producto de lista de contactos para una revisión en vivo al grupo
 Bonus: Añade una función que permita actualizar un contacto */
 
-//* Definición de la función para crear objetos Contact
-class Contact {
-  constructor(name, lastName, cell, locations) {
-    // Atributos
-    this.id = contactsCounter++;
-    this.name = name;
-    this.lastName = lastName;
-    this.cell = cell;
-    this.locations = locations;
-  }
-}
-
 // FUNCIONES
 //* Añadir contacto - Pide los datos al usuario mediante un prompt
 const addContact = function () {
   alert("Ingresar nuevo contacto");
-  const name = prompt("Nombre: ");
-  const lastName = prompt("Apellido: ");
-  const cell = prompt("Celular: ");
-  const locations = [prompt("Dirección: "), prompt("Ciudad: ")];
-  contactList.push(new Contact(name, lastName, cell, locations));
+  const contact = {
+    id: contactsCounter++,
+    name: prompt("Nombre: "),
+    lastName: prompt("Apellido: "),
+    cell: prompt("Celular: "),
+    locations: [prompt("Dirección: "), prompt("Ciudad: ")],
+  };
+  contactList.push(contact);
   console.log("Contacto añadido exitosamente.");
 };
 
@@ -41,7 +32,7 @@ const updateContact = function () {
       prompt("Dirección: ", contact.locations[0]),
       prompt("Ciudad: ", contact.locations[1]),
     ];
-  } else console.log("No existe ningún contacto con el Id especificado.");
+  } else console.log("Id no encontrado.");
 };
 
 //* Borrar contacto
@@ -53,18 +44,31 @@ const delContact = function () {
                                     \nNombre: ${contact.name} ${contact.lastName}
                                     \ncelular: ${contact.cell}
                                     \nDirección: ${contact.locations[0]}, ${contact.locations[1]}
-                                    \n¿Está seguro? ('S' para confirmar, 'N' para abortar)`);
+                                    \n¿Está seguro? (Si/No)`);
     confirmation = confirmation.toUpperCase();
-    if (confirmation == "S") {
-      contactList.splice(contactList.indexOf(contact), 1);
+    if (confirmation == "SI") {
+      contactList = contactList.filter((contact) => contact.id != contactId);
       console.log(`Contacto eliminado exitosamente.`);
-    } else if (confirmation == "N") console.log("Se abortó la operación");
+    } else if (confirmation == "NO") console.log("Se abortó la operación");
     else console.log("Opción inválida");
   } else console.log("No existe ningún contacto con el Id especificado");
 };
 
+//* Métodos de ordenamiento
+// Por nombre
+const orderByName = function() {
+  for (let i = 0; i < contactList.length - 1; i ++) {
+    for (let j = 0; j < contactList.length - 1 - i; j++) {
+      if (contactList[i].name > contactList[i + 1].name) {
+        [contactList[i], contactList[i + 1]] = [contactList[i + 1], contactList[i]];
+      }
+    }
+  }
+};
+
 // * Imprimir los contactos en consola por medio de un for
 const printContacts = function () {
+  console.log("");
   console.log("**************************");
   console.log("*** LISTA DE CONTACTOS ***");
   console.log("**************************");
@@ -82,23 +86,35 @@ const printContacts = function () {
 let contactsCounter = 1;
 
 //* Lista con algunos contactos predefinidos
-const contactList = [
-  new Contact("Anastasia", "del Socorro", "3500000000", [
-    "Calle 5 # 8 - 25",
-    "Tangamandapio",
-  ]),
-  new Contact("Petronio", "Euclides", "3100000000", [
-    "Cra 15 # 24 - 14",
-    "Somondoco",
-  ]),
-  new Contact("Jacinta", "Trinidad Díaz", "3120000000", [
-    "Calle 8 # 8 - 8",
-    "Cucaita",
-  ]),
-  new Contact("Rupertino", "Feo", "3200000000", [
-    "Calle 13 # 23 - 12",
-    "Sutamarchan",
-  ]),
+let contactList = [
+  {
+    id: contactsCounter++,
+    name: "Anastasia",
+    lastName: "del Socorro",
+    cell: "3500000000",
+    locations: ["Calle 5 # 8 - 25", "Tangamandapio"],
+  },
+  {
+    id: contactsCounter++,
+    name: "Petronio",
+    lastName: "Euclides",
+    cell: "3100000000",
+    locations: ["Cra 15 # 24 - 14", "Somondoco"],
+  },
+  {
+    id: contactsCounter++,
+    name: "Jacinta",
+    lastName: "Trinidad Díaz",
+    cell: "3120000000",
+    locations: ["Calle 8 # 8 - 8", "Cucaita"],
+  },
+  {
+    id: contactsCounter++,
+    name: "Rupertino",
+    lastName: "Feo",
+    cell: "3200000000",
+    locations: ["Calle 13 # 23 - 12", "Sutamarchan"],
+  },
 ];
 
 //* Imprimir la lista de contactos mediante el console.table
@@ -107,3 +123,10 @@ console.table(contactList);
 
 // Llamado de las funciones
 printContacts();
+orderByName();
+printContacts();
+addContact();
+addContact();
+orderByName();
+printContacts();
+
