@@ -74,7 +74,50 @@ const sortLastName = function (first, second) {
 };
 const orderByLastName = function () {
   contactList = contactList.sort(sortLastName);
-}
+};
+
+// Por Id
+const sortId = function (first, second) {
+  if (first.id < second.id) {
+    return -1;
+  }
+  if (first.id > second.id) {
+    return 1;
+  }
+  return 0;
+};
+
+const orderById = function () {
+  contactList = contactList.sort(sortId);
+};
+
+// Mediante el atributo order
+const sortOrder = function (first, second) {
+  first.order.localeCompare(second.order);
+};
+const sortList = function () {
+  contactList = contactList.sort(sortOrder);
+};
+const orderList = function () {
+  const option = prompt(`¿Cómo deseas ordenar la lista de contactos?\n
+                          1. Por nombre \n
+                          2. Por apellido\n
+                          3. Por Id\n
+                          Escoge una opción: `);
+  if (option == 1) {
+    contactList.forEach(contact => contact.order = contact.name);
+    sortList();
+  } else if(option == 2) {
+    contactList.forEach((contact) => (contact.order = contact.lastName));
+    sortList();
+  } else if (option == 3) {
+    contactList.forEach(contact => contact.order = contact.id);
+    sortList();
+  } else {
+    console.log("Opción incorrecta");
+  }
+};
+
 
 // * Imprimir los contactos en consola por medio de un for
 const printContacts = function () {
@@ -133,10 +176,8 @@ console.table(contactList);
 
 // Llamado de las funciones
 printContacts();
-orderByName();
-printContacts();
-// addContact();
-// addContact();
-orderByLastName();
-printContacts();
+// orderByName();
+// printContacts();
+// orderByLastName();
+// printContacts();
 
